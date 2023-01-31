@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+
+import string
+import random
+import sys
+
+alpha_low = string.ascii_lowercase
+alpha_high = string.ascii_uppercase
+alphanums = list(range(11))
+pwd = ''
+
+for a in alpha_low:
+  alphanums.append(a)
+
+for a in alpha_high:
+  alphanums.append(a)
+
+if len(sys.argv) > 1:
+  if sys.argv[1] == 'msecure':
+    password_len = 64
+  elif sys.argv[1] == 'usecure':
+    password_len = random.randint(32,64)
+  elif sys.argv[1] == 'secure':
+    password_len = random.randint(16,32)
+  else:
+    print(f"Usage: {sys.argv[0]} [secure/usecure/msecure]  // optional") 
+    exit(1)
+else:
+  password_len = random.randint(10,16)
+  
+for a in range(password_len):
+  pwd +=str(alphanums[random.randint(0,len(alphanums)-1)])
+
+print(f"Your password len is: {password_len}")
+print(f"Your final password is {pwd}")
